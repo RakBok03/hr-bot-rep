@@ -30,5 +30,10 @@ templates = Jinja2Templates(directory=TEMPLATES_DIR)
 async def index(request: Request):
     static_version = os.environ.get("APP_STATIC_VERSION") or str(randint(1, 999))
     return templates.TemplateResponse(
-        "index.html", {"request": request, "static_version": static_version}
+        request=request,  # Добавили это
+        name="index.html", # Явно указали имя
+        context={
+            "request": request, 
+            "static_version": static_version
+        }
     )
