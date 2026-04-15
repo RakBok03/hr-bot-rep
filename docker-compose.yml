@@ -1,0 +1,44 @@
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: bot/Dockerfile
+    container_name: bot
+    env_file: .env
+    volumes:
+      - bot_data:/app/data
+    networks:
+      - npm_network
+    command: ["python", "-m", "app.main"]
+
+  webapp:
+    build:
+      context: .
+      dockerfile: webApp/Dockerfile
+    container_name: webapp
+    env_file: .env
+    volumes:
+      - bot_data:/app/data
+    ports:
+      - "8000:8000"
+    networks:
+      - npm_network
+    command: ["uvicorn", "app.api.webapp:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  sheet_sync:
+    build:
+      context: .
+      dockerfile: sheet_sync/Dockerfile
+    container_name: sheet_sync
+    env_file: .env
+    volumes:
+      - bot_data:/app/data
+    networks:
+      - npm_network
+
+networks:
+  npm_network:
+    external: true
+
+volumes:
+  bot_data:

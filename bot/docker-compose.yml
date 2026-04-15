@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  bot:
+    build:
+      context: ..
+      dockerfile: bot/Dockerfile
+    container_name: bot
+    env_file: ../.env
+    volumes:
+      - bot_data:/app/data
+    command: ["python", "-m", "app.main"]
+
+volumes:
+  bot_data:

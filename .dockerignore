@@ -1,0 +1,27 @@
+# Git и история
+.git
+.gitignore
+
+.env
+.env.*
+!.env.example
+*.pem
+
+**/__pycache__
+**/*.py[cod]
+**/.venv
+**/venv
+**/*.egg-info
+**/.eggs
+
+**/*.db
+**/data/
+
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+
+*.md
+docker-compose*.yml
+.dockerignore
